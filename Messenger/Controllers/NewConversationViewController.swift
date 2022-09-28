@@ -93,6 +93,7 @@ extension NewConversationViewController: UITableViewDelegate,UITableViewDataSour
         tableView.deselectRow(at: indexPath, animated: true)
         // start conversation
         let targetUserData = results[indexPath.row]
+        print(targetUserData)
         dismiss(animated: true, completion: {[weak self] in
             self?.completion?(targetUserData)
         })

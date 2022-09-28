@@ -11,6 +11,9 @@ import FBSDKLoginKit
 import GoogleSignIn
 import RealmSwift
 
+protocol ProfileViewControllerDataSource: AnyObject {
+    func didLogOut()
+}
 
 
 
@@ -19,6 +22,7 @@ final class ProfileViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     
     var data = [ProfileViewModel]()
+    var delegate: ProfileViewControllerDataSource?
     
     private var logInObserver: NSObjectProtocol?
     
@@ -63,7 +67,7 @@ final class ProfileViewController: UIViewController {
                 
                 do {
                     try FirebaseAuth.Auth.auth().signOut()
-                    
+                    NotificationCenter.default.post(name: .didLogOutNotification, object: nil)
                     let vc = LoginViewController()
                     let nav = UINavigationController(rootViewController:vc)
                     nav.modalPresentationStyle = .fullScreen
@@ -72,6 +76,8 @@ final class ProfileViewController: UIViewController {
                 catch {
                     print("Failed to log out")
                 }
+                
+               
                 
            
             }))

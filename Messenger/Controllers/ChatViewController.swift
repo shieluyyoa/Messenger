@@ -537,7 +537,6 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
                         print("Failed to get download url: \(error)")
                     }
                 })
-                
             }
             
         } else {

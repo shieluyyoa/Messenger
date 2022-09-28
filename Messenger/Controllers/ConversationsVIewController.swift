@@ -40,7 +40,8 @@ final class ConversationsViewController: UIViewController {
     }()
     
     private var logInObserver: NSObjectProtocol?
-
+    private var logOutObserver: NSObjectProtocol?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(didTapComposeButton))
@@ -67,6 +68,15 @@ final class ConversationsViewController: UIViewController {
             strongSelf.startListeningForConversations()
             
         })
+        
+        logOutObserver = NotificationCenter.default.addObserver(forName: .didLogOutNotification, object: nil, queue: .main, using: {
+            [weak self] _ in
+            guard let strongSelf = self else {
+                return
+            }
+            
+            strongSelf.conversations.removeAll()
+        })
       
       
         
@@ -77,9 +87,9 @@ final class ConversationsViewController: UIViewController {
             return
         }
         
-        if let logInObserver = logInObserver {
-            NotificationCenter.default.removeObserver(logInObserver)
-        }
+//       if let logInObserver = logInObserver {
+//            NotificationCenter.default.removeObserver(logInObserver)
+//        }
         
         print("startin conversatioin fetch")
         
@@ -99,11 +109,13 @@ final class ConversationsViewController: UIViewController {
                 self?.noConversationsLabel.isHidden = true
                 self?.tableView.isHidden = false
                 self?.conversations = conversations
+                print(self?.conversations)
                 
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()
                 }
             case .failure(let error):
+                self?.tableView.reloadData()
                 self?.tableView.isHidden = true
                 self?.noConversationsLabel.isHidden = false
                 print("failed to get convons: \(error)")
@@ -118,6 +130,7 @@ final class ConversationsViewController: UIViewController {
         let vc = NewConversationViewController()
         vc.completion = { [weak self] result in
             print("\(result)")
+            print(self?.conversations)
             let currentConversatoin = self?.conversations
             
             if let targerConversation = currentConversatoin?.first(where: {
@@ -269,3 +282,4 @@ extension ConversationsViewController: UITableViewDelegate,UITableViewDataSource
     }
     
 }
+
