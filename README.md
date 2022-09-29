@@ -29,7 +29,9 @@ A real time chat application built with FireBase and MessageKit in Swift.
 ### Real Time Conversation 
 
 
-![Simulator Screen Recording - iPhone 12 - 2022-09-29 at 19 33 40](https://user-images.githubusercontent.com/88272090/193021438-b00600e9-ad69-4db1-b73a-f64e2376095f.gif).            ![Simulator Screen Recording - iPhone 13 - 2022-09-29 at 19 33 39](https://user-images.githubusercontent.com/88272090/193021447-7e092197-1b35-4369-bd05-e00e6e43b085.gif)
+![Real_time1](https://user-images.githubusercontent.com/88272090/193110500-22c74a0b-9b32-49d8-a519-c6bba7f78dda.gif).       ![RealTime2](https://user-images.githubusercontent.com/88272090/193110510-855b1312-7d5c-4c22-a18d-65d4b605b199.gif)
+
+
 
 
 
